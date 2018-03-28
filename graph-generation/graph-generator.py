@@ -1,4 +1,5 @@
 #!/usr/local/bin/python3
+
 import argparse
 import random
 
@@ -17,19 +18,24 @@ parser.add_argument('total_nodes', type=int, nargs='?', default=TOTAL_NODES,
 parser.add_argument('max_links', type=int, nargs='?', default=MAX_OUTBOUND_LINKS,
     help="Maximum number of outgoing directed links from each node")
 parser.add_argument('max_weight', type=int, nargs='?', default=MAX_WEIGHT,
-    help="Maximum distance/weight on the link of each nodee")
+    help="Maximum distance/weight on the link of each node")
+parser.add_argument('-s', '--allow-sink-nodes', action="store_true",
+    help="Can there be nodes without childs ?")
 args = parser.parse_args()
 
 nodes = range(1, args.total_nodes+1)
 
 for point in nodes:
     # Randomly select a number of outgoing directed links for this node
-    nb_neighbors = random.randint(1, args.max_links)
+    nb_neighbors = random.randint(int(not args.allow_sink_nodes), args.max_links)
     # Randomly select k linked nodes in the node population
-    neighbors = random.sample(nodes, nb_neighbors)
-    for neighbor in neighbors:
-        # Choose a weight for each link
-        distance = random.randint(1, args.max_weight)
-        # Print the line
-        output = [point, neighbor, distance]
-        print('\t'.join((str(x) for x in output)))
+    if nb_neighbors != 0:
+        neighbors = random.sample(nodes, nb_neighbors)
+        for neighbor in neighbors:
+            # Choose a weight for each link
+            distance = random.randint(1, args.max_weight)
+            # Print the line
+            output = [point, neighbor, distance]
+            print('\t'.join((str(x) for x in output)))
+    else:
+        print(point)
