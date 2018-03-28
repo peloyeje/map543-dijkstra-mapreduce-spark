@@ -18,5 +18,5 @@ for line in sys.stdin:
         child_node = pair[0]
         dist = int(pair[1])
         child_dist = distance + dist
-        child_path = path + '->' + str(child_node)
+        child_path = path + '>' + str(child_node)
         print '%s\t%s\t%s' % (child_node, child_dist, child_path)
