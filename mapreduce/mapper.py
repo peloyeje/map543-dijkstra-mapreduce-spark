@@ -7,20 +7,25 @@ for line in sys.stdin:
 
     node = line[0]
     distance = line[1]
+    # Set neighbours variable only if the node has some
     neighbours = line[2] if len(line) > 2 and line[2] != "0" else 0
+    # Propagate computed path at previous step, or set beginning of path
     path = line[3] if len(line) == 4 else node
 
     try:
         distance = int(distance)
     except:
+        # Skip node
         continue
 
-    # Print complete node
+    # Print complete node to keep the graph structure for future iterations
     print('{}\t{}\t{}\t{}'.format(node, distance, neighbours, node))
 
+    # If the node has no childs, there is nothing left to do.
     if neighbours:
         neighbours = neighbours.strip().split(',')
 
+        # For each neighbor, print its updated distance to the source node
         for neighbour in neighbours:
             child_node, child_distance = neighbour.strip().split(':', 1)
 

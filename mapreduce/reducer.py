@@ -11,16 +11,17 @@ for line in sys.stdin:
     line = line.strip().split('\t')
 
     if len(line) < 3:
-        # Line wrongly formatted
+        # Line wrongly formatted, abort.
         continue
 
     node = line[0]
     distance = line[1]
     if len(line) == 3:
-        # Child Line
+        # The line corresponds to a "child" distance update information
         path = line[2]
         neighbours = 0
     if len(line) == 4:
+        # Else, it's a complete node.
         path = line[3]
         neighbours = line[2] if line[2] != "0" else 0
 
@@ -29,6 +30,9 @@ for line in sys.stdin:
     except:
         continue
 
+    # For each node, collect all distance updates. If a new distance is smaller
+    # than the current one, update the node distance and the path
+    
     if current_node == node:
         if distance < current_dist:
             current_dist = distance
