@@ -1,4 +1,5 @@
 INPUT_FILE="$1"
+PARAM="$2"
 
 init() {
   TMP_DIR="$(pwd)/tmp/"
@@ -32,8 +33,7 @@ launch_job() {
 
     if [ $NB_ALONE == $OLD_NB_ALONE ]
     then
-      echo "End of convergence !\n\n"
-      echo "-----"
+      echo "End of convergence !"
       break
     fi
 
@@ -44,7 +44,11 @@ launch_job() {
   # Move final result file to current directory
   mv "$INPUT_FILE" ./result.txt
   # Display the results
-  cat ./result.txt | cut -d$'\t' -f1,2,4
+  if [ "$PARAM" == "-v" ]
+  then
+    echo "\n\n-----\n\n"
+    cat ./result.txt | cut -d$'\t' -f1,2,4
+  fi
   # Clear temporary files
   rm -rf "$TMP_DIR"
 }
