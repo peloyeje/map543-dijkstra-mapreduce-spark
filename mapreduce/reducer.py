@@ -17,7 +17,7 @@ for line in sys.stdin:
     node = line[0]
     distance = line[1]
     if len(line) == 3:
-        # The line corresponds to a "child" distance update information
+        # The line corresponds to a "child" distance update information.
         path = line[2]
         neighbours = 0
     if len(line) == 4:
@@ -32,7 +32,7 @@ for line in sys.stdin:
 
     # For each node, collect all distance updates. If a new distance is smaller
     # than the current one, update the node distance and the path
-    
+
     if current_node == node:
         if distance < current_dist:
             current_dist = distance
@@ -47,4 +47,4 @@ for line in sys.stdin:
         current_neighbours = neighbours
 
 if current_node == node:
-    print '%s\t%s\t%s\t%s' % (current_node, current_dist, neighbours, current_path)
+    print '%s\t%s\t%s\t%s' % (current_node, current_dist, current_neighbours, current_path)

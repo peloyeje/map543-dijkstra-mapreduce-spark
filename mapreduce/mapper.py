@@ -19,7 +19,7 @@ for line in sys.stdin:
         continue
 
     # Print complete node to keep the graph structure for future iterations
-    print('{}\t{}\t{}\t{}'.format(node, distance, neighbours, node))
+    print('{}\t{}\t{}\t{}'.format(node, distance, neighbours, path))
 
     # If the node has no childs, there is nothing left to do.
     if neighbours:
