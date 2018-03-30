@@ -1,2 +1,5 @@
 .ipynb_checkpoints/
 *.pyc
+.DS_Store
+**/*.txt
+!graph-data/*.txt
