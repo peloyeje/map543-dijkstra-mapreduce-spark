@@ -3,3 +3,4 @@
 .DS_Store
 **/*.txt
 !graph-data/*.txt
+mapreduce/tm
