@@ -38,7 +38,7 @@ launch_job() {
 
     if [ "$DIST" -ge "$SUM_DISTANCES" ] &&  [ ! "$SUM_DISTANCES" -eq 0 ]
     then
-      echo "End of convergence !"
+      echo "Convergence criterion met !"
       break
     fi
 
