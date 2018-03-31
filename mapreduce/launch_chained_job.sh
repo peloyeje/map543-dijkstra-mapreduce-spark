@@ -16,33 +16,38 @@ init() {
 
 launch_job() {
   TMP_FILENAME="output.txt"
-  OLD_NB_ALONE=0
+  SUM_DISTANCES=0
   TOTAL_NODES=`cat "$INPUT_FILE" | wc -l`
 
   # Iteratively run mapreduce jobs until all possible paths are found
   for ((i=1; i>0; i++)); do
     echo "Starting iteration $i ..."
 
+    DIST=0
     PAIR=$((i%2))
     TMP_FILE="$TMP_DIR$TMP_FILENAME$PAIR"
+
     # MapReduce job emulation
     cat "$INPUT_FILE" | ./mapper.py | sort -k1n | ./reducer.py > "$TMP_FILE"
-    # Compute the number of nodes with distance of 1000
-    NB_ALONE=`cat "$TMP_FILE" | cut -d$'\t' -f2 | grep -c "1000"`
-    echo "Found $(($TOTAL_NODES-$NB_ALONE)) paths ..."
+    # Distance computation
+    while read num
+    do
+      DIST=$((DIST + num))
+    done <<< "$(cat "$TMP_FILE" | cut -d$'\t' -f2)"
+    echo "Sum : $DIST"
 
-    if [ $NB_ALONE == $OLD_NB_ALONE ]
+    if [ "$DIST" -ge "$SUM_DISTANCES" ] &&  [ ! "$SUM_DISTANCES" -eq 0 ]
     then
       echo "End of convergence !"
       break
     fi
 
-    OLD_NB_ALONE=$NB_ALONE
+    SUM_DISTANCES=$DIST
     INPUT_FILE="$TMP_FILE"
   done
 
   # Move final result file to current directory
-  mv "$INPUT_FILE" ./result.txt
+  mv "$TMP_FILE" ./result.txt
   # Display the results
   if [ "$PARAM" == "-v" ]
   then
