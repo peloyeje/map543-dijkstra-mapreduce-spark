@@ -1,4 +1,4 @@
-#!/usr/local/bin/python3
+#!/usr/bin/python
 
 import sys
 
@@ -19,7 +19,7 @@ for line in sys.stdin:
         continue
 
     # Print complete node to keep the graph structure for future iterations
-    print('{}\t{}\t{}\t{}'.format(node, distance, neighbours, path))
+    print '%s\t%s\t%s\t%s' % (node, distance, neighbours, path)
 
     # If the node has no childs, there is nothing left to do.
     if neighbours:
@@ -37,4 +37,4 @@ for line in sys.stdin:
             child_distance += distance
             child_path = '{}>{}'.format(path, str(child_node))
 
-            print('{}\t{}\t{}'.format(child_node, child_distance, child_path))
+            print '%s\t%s\t%s' % (child_node, child_distance, child_path)
