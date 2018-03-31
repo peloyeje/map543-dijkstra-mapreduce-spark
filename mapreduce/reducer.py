@@ -34,11 +34,17 @@ for line in sys.stdin:
     # than the current one, update the node distance and the path
 
     if current_node == node:
+        # If one of the parents of the node provides a quicker path, choose it
         if distance < current_dist:
             current_dist = distance
             current_path = path
-
+        # Don't assume that the full node line will come first : update neigh-
+        # bour info as soon as it is available
+        if neighbours != 0:
+            current_neighbours = neighbours
     else:
+        # We change nodes, so we output the result of the reduce process for the
+        # last one
         if current_node:
             print '%s\t%s\t%s\t%s' % (current_node, current_dist, current_neighbours, current_path)
         current_node = node
