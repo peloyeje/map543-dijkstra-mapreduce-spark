@@ -18,7 +18,7 @@ cat my-preprocessed-graph.txt | ./mapper.py | sort -k1n | ./reducer.py > step1.t
 ##### Bash script to automate iterations
 
 ```
-./launch_chained_job.sh <my-graph-file> [-v]
+./launch_local.sh <my-graph-file> [-v]
 ```
 
 It performs unlimited iterations. Convergence is detected if the sum of distances between all nodes and the source node stops decreasing in iteration `n+1`
@@ -38,4 +38,10 @@ hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar \
 -input /user/hadoop/input -output /user/hadoop/output \
 -file mapreduce/mapper.py -mapper mapreduce/mapper.py \
 -file mapreduce/reducer.py -reducer mapreduce/reducer.py
+```
+
+##### Bash script to automate iterations
+
+```
+./launch_hadoop.sh <hdfs-input-path> <hdfs-output-path> <local-mapper-path> <local-reducer-path> [nb_iterations]
 ```
