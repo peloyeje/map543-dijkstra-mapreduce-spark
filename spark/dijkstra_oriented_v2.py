@@ -19,12 +19,12 @@ def read_generated_graph_line(line):
         origin = line[0]
         neighbours = line[2]
         try:
-            return (origin, [(pair.split(":")[0].strip(), int(pair.split(":")[1].strip()))
-                             for pair in neighbours.split(",")])
+            return [(origin, (pair.split(":")[0].strip(), int(pair.split(":")[1].strip())))
+                    for pair in neighbours.split(",")]
         except IndexError:
-            raise RuntimeError("file not well formated")
+            raise RuntimeError("file not well formatted")
     else:
-        raise RuntimeError("file not well formated")
+        raise RuntimeError("file not well formatted")
 
 
 def shortest_path_to_point(x, y):
