@@ -20,12 +20,6 @@ launch_job() {
 
   # Iteratively run mapreduce jobs until all possible paths are found
   for ((i=1; i>0; i++)); do
-    if [ ! -z $ITERATIONS ] && [ $i -gt $ITERATIONS ]
-    then
-      echo "Maximum number of iterations reached. Stopping ..."
-      break
-    fi
-
     echo "Starting iteration $i ..."
 
     DIST=0
@@ -46,17 +40,21 @@ launch_job() {
     done <<< "$(cat "$TMP_FILE" | cut -d$'\t' -f2)"
     echo "Sum : $DIST"
 
-    if [ "$DIST" -ge "$SUM_DISTANCES" ] && [ ! "$SUM_DISTANCES" -eq 0 ]
+    if [ ! -z $ITERATIONS ] && [ $(($i+1)) -gt $ITERATIONS ]
     then
-      echo "End of convergence !"
+      echo "Maximum number of iterations reached. Stopping ..."
       break
+    elif [ "$DIST" -ge "$SUM_DISTANCES" ] && [ ! "$SUM_DISTANCES" -eq 0 ]
+    then
+      echo "Convergence criterion met !"
+      break
+    else
+      SUM_DISTANCES=$DIST
+      # Move reducer output into input directory to prepare the next job
+      hdfs dfs -rm -r "$INPUT_DIR"/*
+      hdfs dfs -mv "$OUTPUT_DIR"/* "$INPUT_DIR"
+      hdfs dfs -rm -r -f "$OUTPUT_DIR"
     fi
-
-    SUM_DISTANCES=$DIST
-    # Move reducer output into input directory to prepare the next job
-    hdfs dfs -rm -r "$INPUT_DIR"/*
-    hdfs dfs -mv "$OUTPUT_DIR"/* "$INPUT_DIR"
-    hdfs dfs -rm -r -f "$OUTPUT_DIR"
   done
 
   # Move final result file to current directory
