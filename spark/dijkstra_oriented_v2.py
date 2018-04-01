@@ -1,9 +1,9 @@
 import time
 
-from pyspark.sql import SparkSession
+import pyspark
 
-spark = SparkSession.builder.appName("dikjstra").getOrCreate()
-sc = spark.sparkContext
+conf = pyspark.SparkConf().setAppName("Dijkstra").set("spark.dynamicAllocation.enabled", "false")
+sc = pyspark.SparkContext(conf=conf)
 log4jLogger = sc._jvm.org.apache.log4j
 logger = log4jLogger.LogManager.getLogger(__name__)
 
@@ -24,7 +24,7 @@ def read_generated_graph_line(line):
         except IndexError:
             raise RuntimeError("file not well formatted")
     else:
-        raise RuntimeError("file not well formatted")
+        return
 
 
 def shortest_path_to_point(x, y):
@@ -32,12 +32,10 @@ def shortest_path_to_point(x, y):
 
     if x["weight_of_path"] <= y["weight_of_path"]:
         res = {"weight_of_path": x["weight_of_path"],
-               "path": x["path"],
-               "explored_path": x["explored_path"] | y["explored_path"]}
+               "path": x["path"]}
     else:
         res = {"weight_of_path": y["weight_of_path"],
-               "path": y["path"],
-               "explored_path": x["explored_path"] | y["explored_path"]}
+               "path": y["path"]}
     return res
 
 
@@ -49,20 +47,25 @@ def compute_path(x):
     # (origin, ((weight_to_origin, path_to_origin, paths_visited_to_origin), (destination, weight_to_destination)))
     return (x[1][1][0], {
                          "weight_of_path": x[1][0]["weight_of_path"] + x[1][1][1],
-                         "path": x[1][0]["path"] + [x[0]],
-                         "explored_path": {x[0]}
+                         "path": x[1][0]["path"] + [x[0]]
     })
+
+
+def get_txt(path):
+    res = str(path[0])
+    res += " : " + ">".join(path[1]["path"])
+    res += " for weight " + str(path[1]["weight_of_path"])
+    return res
 
 
 # Initialisation
 #
 #
 # a file named graph.txt must be provided in the --file option of spark submit
-directions = sc.textFile("file:///graph.txt").flatMap(read_generated_graph_line)
-begin, objective = directions.keys().takeSample(False, 2)
-paths_to_objective = set(directions.map(lambda x: (x[1][0], x[0])).filter(lambda x: x[0] == objective)
-                         .lookup(objective))
-shortest_paths = sc.parallelize([(begin, {"weight_of_path": 0, "path": [], "explored_path": set()})])
+n_part = 6
+directions = sc.textFile("hdfs:///user/hadoop/graph_100.txt").filter(lambda x: x != "").flatMap(read_generated_graph_line)
+begin = "1"
+shortest_paths = sc.parallelize([(begin, {"weight_of_path": 0, "path": []})]).partitionBy(n_part)
 final_paths = sc.emptyRDD()
 early_stop = 30
 continue_criteria = True
@@ -74,29 +77,29 @@ points_to_drop = sc.broadcast(set())
 #
 i = 0
 while continue_criteria:
-    logger.info("##### iteration {} ######".format(i))
-    logger.info("size directions : {}".format(directions.count()))
-    logger.info("size paths {}".format(shortest_paths.count()))
+    print("##### iteration {} ######".format(i))
+    print("size directions : {}".format(directions.count()))
+    print("size paths {}".format(shortest_paths.count()))
 
     time_0 = time.time()
     time_1 = time.time()
 
     # finding all the paths connected with the already visited points
-    new_paths = shortest_paths.join(directions).map(compute_path)
-    new_paths.collect()
-    logger.info("join time : {}".format(time.time() - time_0))
+    new_paths = shortest_paths.join(directions, n_part).map(compute_path).cache()
+    print("join result size : {}".format(new_paths.count()))
+    print("join time : {}".format(time.time() - time_0))
     time_0 = time.time()
     try:
         # value of the minimum path to one of those points reached at step n+1
         min_new_paths = sc.broadcast(new_paths.map(lambda x: x[1]["weight_of_path"]).min())
-        logger.info("min time = {}".format(time.time() - time_0))
+        print("min time = {}".format(time.time() - time_0))
         time_0 = time.time()
 
         # we can now abandon all the paths reached at step n with a smaller path than the min calculated above
         # (these paths cannot be improoved further)
         points_to_drop = sc.broadcast(set(shortest_paths.filter(
             lambda x: x[1]["weight_of_path"] < min_new_paths.value).keys().collect()) | points_to_drop.value)
-        logger.info("find points to drop : {}".format(time.time() - time_0))
+        print("find points to drop : {}".format(time.time() - time_0))
     except ValueError:
         # if no new paths are detected:
         min_new_paths = sc.broadcast(float("inf"))
@@ -106,18 +109,23 @@ while continue_criteria:
     shortest_paths = new_paths.union(shortest_paths).reduceByKey(shortest_path_to_point)
     final_paths = final_paths.union(shortest_paths.filter(lambda x: x[0] in points_to_drop.value))
     shortest_paths = shortest_paths.filter(lambda x: x[0] not in points_to_drop.value)
+    shortest_paths.cache()
     shortest_paths.collect()
-    logger.info("reduce by key : {}".format(time.time() - time_0))
+    print("reduce by key : {}".format(time.time() - time_0))
 
     # we can also drop all the directions going from and to the droped points in order to increase speed of the join
     time_0 = time.time()
     directions = directions.filter(lambda x: x[0] not in points_to_drop.value and x[1][0] not in points_to_drop.value)
-
+    directions.cache()
     # stopping criteria
     i += 1
 
-    continue_criteria = directions.collect() != [] and i < early_stop
-    logger.info("filter directions : {}".format(time.time() - time_0))
-    logger.info("total_time : {} \n\n\n".format(time.time() - time_1))
+    continue_criteria = min_new_paths.value != float("inf") and i < early_stop
+    print("filter directions : {}".format(time.time() - time_0))
+    print("total_time : {} \n\n\n".format(time.time() - time_1))
+
+final_paths = final_paths.union(shortest_paths)
+
 
 # add save for final_paths
+final_paths.map(get_txt).coalesce(1).saveAsTextFile("results/")
