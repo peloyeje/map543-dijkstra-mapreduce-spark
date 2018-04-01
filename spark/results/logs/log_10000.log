@@ -1,0 +1,529 @@
+##### iteration 0 ######
+size directions : 154163
+size paths 1
+join result size : 3
+join time : 1.81821608543
+min time = 0.210995912552
+find points to drop : 0.182203054428
+reduce by key : 0.71989607811
+filter directions : 0.0178349018097
+total_time : 2.94935202599 
+
+
+
+##### iteration 1 ######
+size directions : 154145
+size paths 3
+join result size : 64
+join time : 2.48673081398
+min time = 0.234311103821
+find points to drop : 0.227865219116
+reduce by key : 1.46747303009
+filter directions : 0.00871086120605
+total_time : 4.42518997192 
+
+
+
+##### iteration 2 ######
+size directions : 154122
+size paths 66
+join result size : 1003
+join time : 2.71257996559
+min time = 0.204228878021
+find points to drop : 0.615607976913
+reduce by key : 1.85496783257
+filter directions : 0.00818014144897
+total_time : 5.39565706253 
+
+
+
+##### iteration 3 ######
+size directions : 154058
+size paths 971
+join result size : 15344
+join time : 2.65728187561
+min time = 0.147048950195
+find points to drop : 0.683325052261
+reduce by key : 2.24820303917
+filter directions : 0.0090651512146
+total_time : 5.7450170517 
+
+
+
+##### iteration 4 ######
+size directions : 153974
+size paths 7849
+join result size : 120638
+join time : 3.49985814095
+min time = 0.313934087753
+find points to drop : 0.79754281044
+reduce by key : 2.89005994797
+filter directions : 0.00819802284241
+total_time : 7.50969195366 
+
+
+
+##### iteration 5 ######
+size directions : 153891
+size paths 9990
+join result size : 153891
+join time : 3.91297793388
+min time = 0.355321884155
+find points to drop : 0.907049894333
+reduce by key : 3.57212305069
+filter directions : 0.00852012634277
+total_time : 8.75609087944 
+
+
+
+##### iteration 6 ######
+size directions : 153728
+size paths 9985
+join result size : 153728
+join time : 4.21327805519
+min time = 0.402872085571
+find points to drop : 1.05185484886
+reduce by key : 3.82707595825
+filter directions : 0.00858187675476
+total_time : 9.50377011299 
+
+
+
+##### iteration 7 ######
+size directions : 153517
+size paths 9978
+join result size : 153517
+join time : 4.70877194405
+min time = 0.402317047119
+find points to drop : 1.17249107361
+reduce by key : 3.94461607933
+filter directions : 0.00854015350342
+total_time : 10.2368388176 
+
+
+
+##### iteration 8 ######
+size directions : 153326
+size paths 9972
+join result size : 153326
+join time : 5.13479208946
+min time = 0.406984090805
+find points to drop : 1.40098190308
+reduce by key : 4.51151609421
+filter directions : 0.00846791267395
+total_time : 11.4628379345 
+
+
+
+##### iteration 9 ######
+size directions : 153064
+size paths 9964
+join result size : 153064
+join time : 5.96658086777
+min time = 0.404627084732
+find points to drop : 1.52722787857
+reduce by key : 5.19396781921
+filter directions : 0.0083601474762
+total_time : 13.1008548737 
+
+
+
+##### iteration 10 ######
+size directions : 152784
+size paths 9954
+join result size : 152784
+join time : 5.68942189217
+min time = 0.407287120819
+find points to drop : 1.71547007561
+reduce by key : 4.83840990067
+filter directions : 0.0089168548584
+total_time : 12.6596050262 
+
+
+
+##### iteration 11 ######
+size directions : 152168
+size paths 9935
+join result size : 152168
+join time : 6.12798714638
+min time = 0.422300815582
+find points to drop : 1.86653089523
+reduce by key : 4.91845107079
+filter directions : 0.00897121429443
+total_time : 13.3443510532 
+
+
+
+##### iteration 12 ######
+size directions : 151572
+size paths 9914
+join result size : 151572
+join time : 6.33648991585
+min time = 0.438278198242
+find points to drop : 1.95380306244
+reduce by key : 5.27413797379
+filter directions : 0.0105109214783
+total_time : 14.0133359432 
+
+
+
+##### iteration 13 ######
+size directions : 150883
+size paths 9894
+join result size : 150883
+join time : 6.36788487434
+min time = 0.419855117798
+find points to drop : 1.94803714752
+reduce by key : 5.35115003586
+filter directions : 0.00936698913574
+total_time : 14.0963959694 
+
+
+
+##### iteration 14 ######
+size directions : 149391
+size paths 9847
+join result size : 149391
+join time : 6.53392291069
+min time = 0.407110929489
+find points to drop : 2.31360793114
+reduce by key : 5.75242114067
+filter directions : 0.00849103927612
+total_time : 15.015650034 
+
+
+
+##### iteration 15 ######
+size directions : 148090
+size paths 9806
+join result size : 148090
+join time : 7.25821495056
+min time = 0.41214299202
+find points to drop : 2.4214849472
+reduce by key : 6.24826312065
+filter directions : 0.00779104232788
+total_time : 16.347992897 
+
+
+
+##### iteration 16 ######
+size directions : 146125
+size paths 9741
+join result size : 146125
+join time : 7.6710691452
+min time = 0.407650947571
+find points to drop : 2.49486804008
+reduce by key : 6.47099685669
+filter directions : 0.00801706314087
+total_time : 17.0527098179 
+
+
+
+##### iteration 17 ######
+size directions : 142915
+size paths 9634
+join result size : 142915
+join time : 7.4549241066
+min time = 0.421180963516
+find points to drop : 2.46908688545
+reduce by key : 7.15242695808
+filter directions : 0.00867199897766
+total_time : 17.5063939095 
+
+
+
+##### iteration 18 ######
+size directions : 139332
+size paths 9517
+join result size : 139332
+join time : 7.62033486366
+min time = 0.401502132416
+find points to drop : 2.91126203537
+reduce by key : 7.40127706528
+filter directions : 0.00853705406189
+total_time : 18.3430140018 
+
+
+
+##### iteration 19 ######
+size directions : 134235
+size paths 9339
+join result size : 134235
+join time : 8.36947989464
+min time = 0.397181034088
+find points to drop : 3.03002309799
+reduce by key : 7.97552990913
+filter directions : 0.00827789306641
+total_time : 19.7806119919 
+
+
+
+##### iteration 20 ######
+size directions : 126998
+size paths 9080
+join result size : 126998
+join time : 7.95195317268
+min time = 0.377398967743
+find points to drop : 2.83195710182
+reduce by key : 8.6395740509
+filter directions : 0.00797414779663
+total_time : 19.8089499474 
+
+
+
+##### iteration 21 ######
+size directions : 117454
+size paths 8730
+join result size : 117454
+join time : 8.26483917236
+min time = 0.358907938004
+find points to drop : 3.22832798958
+reduce by key : 10.1221280098
+filter directions : 0.00799107551575
+total_time : 21.9822909832 
+
+
+
+##### iteration 22 ######
+size directions : 104944
+size paths 8248
+join result size : 104944
+join time : 8.34811997414
+min time = 0.338535070419
+find points to drop : 3.31152200699
+reduce by key : 10.6768898964
+filter directions : 0.00827598571777
+total_time : 22.683442831 
+
+
+
+##### iteration 23 ######
+size directions : 92376
+size paths 7726
+join result size : 92376
+join time : 8.34669399261
+min time = 0.298624992371
+find points to drop : 3.41244792938
+reduce by key : 10.9662270546
+filter directions : 0.00894498825073
+total_time : 23.033053875 
+
+
+
+##### iteration 24 ######
+size directions : 77868
+size paths 7097
+join result size : 77868
+join time : 8.47377085686
+min time = 0.277251958847
+find points to drop : 3.52863192558
+reduce by key : 11.7033798695
+filter directions : 0.00945496559143
+total_time : 23.9926638603 
+
+
+
+##### iteration 25 ######
+size directions : 61706
+size paths 6316
+join result size : 61706
+join time : 8.7526948452
+min time = 0.245587110519
+find points to drop : 4.03410506248
+reduce by key : 11.5827879906
+filter directions : 0.00874304771423
+total_time : 24.6240210533 
+
+
+
+##### iteration 26 ######
+size directions : 47150
+size paths 5515
+join result size : 47150
+join time : 8.65870594978
+min time = 0.212203025818
+find points to drop : 4.04070401192
+reduce by key : 11.9565708637
+filter directions : 0.00827503204346
+total_time : 24.8765730858 
+
+
+
+##### iteration 27 ######
+size directions : 33880
+size paths 4675
+join result size : 33880
+join time : 9.02929902077
+min time = 0.184555768967
+find points to drop : 4.25656700134
+reduce by key : 12.4558200836
+filter directions : 0.00794696807861
+total_time : 25.9342849255 
+
+
+
+##### iteration 28 ######
+size directions : 22651
+size paths 3834
+join result size : 22651
+join time : 8.85791087151
+min time = 0.172454118729
+find points to drop : 4.1268260479
+reduce by key : 12.3922009468
+filter directions : 0.008868932724
+total_time : 25.5583629608 
+
+
+
+##### iteration 29 ######
+size directions : 14146
+size paths 3042
+join result size : 14146
+join time : 9.28202009201
+min time = 0.154490947723
+find points to drop : 4.4235959053
+reduce by key : 12.3489539623
+filter directions : 0.0121519565582
+total_time : 26.2213881016 
+
+
+
+##### iteration 30 ######
+size directions : 8288
+size paths 2323
+join result size : 8288
+join time : 9.46863102913
+min time = 0.255499124527
+find points to drop : 4.42528510094
+reduce by key : 12.6922738552
+filter directions : 0.0118410587311
+total_time : 26.8539779186 
+
+
+
+##### iteration 31 ######
+size directions : 4612
+size paths 1731
+join result size : 4612
+join time : 9.40880799294
+min time = 0.12965297699
+find points to drop : 4.66618609428
+reduce by key : 12.2842509747
+filter directions : 0.00872802734375
+total_time : 26.4978919029 
+
+
+
+##### iteration 32 ######
+size directions : 2542
+size paths 1284
+join result size : 2542
+join time : 10.028813839
+min time = 0.265717029572
+find points to drop : 4.72706985474
+reduce by key : 11.3963971138
+filter directions : 0.00760912895203
+total_time : 26.4257049561 
+
+
+
+##### iteration 33 ######
+size directions : 1277
+size paths 906
+join result size : 1277
+join time : 10.1763308048
+min time = 0.259447097778
+find points to drop : 4.94065594673
+reduce by key : 11.804735899
+filter directions : 0.0078239440918
+total_time : 27.1890969276 
+
+
+
+##### iteration 34 ######
+size directions : 646
+size paths 649
+join result size : 646
+join time : 10.7070219517
+min time = 0.254008054733
+find points to drop : 4.98029208183
+reduce by key : 11.894190073
+filter directions : 0.0077440738678
+total_time : 27.8433530331 
+
+
+
+##### iteration 35 ######
+size directions : 285
+size paths 451
+join result size : 285
+join time : 10.1893138885
+min time = 0.254323005676
+find points to drop : 4.99110412598
+reduce by key : 11.0794248581
+filter directions : 0.00849795341492
+total_time : 26.5227611065 
+
+
+
+##### iteration 36 ######
+size directions : 143
+size paths 311
+join result size : 143
+join time : 9.74648594856
+min time = 0.254233121872
+find points to drop : 4.42676997185
+reduce by key : 10.1237230301
+filter directions : 0.00819802284241
+total_time : 24.5595018864 
+
+
+
+##### iteration 37 ######
+size directions : 74
+size paths 219
+join result size : 74
+join time : 8.67417788506
+min time = 0.247259140015
+find points to drop : 3.84014010429
+reduce by key : 8.8026599884
+filter directions : 0.00834107398987
+total_time : 21.5726730824 
+
+
+
+##### iteration 38 ######
+size directions : 34
+size paths 150
+join result size : 34
+join time : 7.24339413643
+min time = 0.256813049316
+find points to drop : 3.31629300117
+reduce by key : 7.34409689903
+filter directions : 0.00816512107849
+total_time : 18.1688680649 
+
+
+
+##### iteration 39 ######
+size directions : 3
+size paths 45
+join result size : 3
+join time : 5.76355600357
+min time = 0.264076948166
+find points to drop : 2.55752301216
+reduce by key : 5.62962889671
+filter directions : 0.00845003128052
+total_time : 14.223334074 
+
+
+
+##### iteration 40 ######
+size directions : 0
+size paths 3
+join result size : 0
+join time : 4.97437906265
+reduce by key : 5.04352998734
+filter directions : 0.00909304618835
+total_time : 10.2459411621 
+

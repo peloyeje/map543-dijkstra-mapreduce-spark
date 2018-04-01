@@ -128,4 +128,4 @@ final_paths = final_paths.union(shortest_paths)
 
 
 # add save for final_paths
-final_paths.map(get_txt).coalesce(1).saveAsTextFile("results/")
+final_paths.map(get_txt).coalesce(n_part).saveAsTextFile("results/")
